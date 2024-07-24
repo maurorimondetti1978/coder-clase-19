@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=h, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body style="background-color: brown;">
-    <h1>Aca se listaran los cursos</h1>
-</body>
-</html>
+{% extends "appcoder/padre.html"%}
+
+{% block titulo %} Coderhouse | Cursos {%endblock%}
+
+{% block contenidoQueCambia %}
+
+{% include 'appcoder/publicidad.html' %} 
+
+<h1> Aca estaran listados todos los cursos </h1>
+
+{% for curso in cursos%}
+
+{{curso.nombre}} - {{curso.comision}}
+
+{%  endfor %}
+
+{% endblock%}
