@@ -10,5 +10,4 @@ urlpatterns = [
     path('entregables', entregables, name= "entregables"),
     path('cursoFormulario',cursoFormulario,name="CursoFormulario"),
     path('form-con-api', form_con_api, name="FormConApi"),
-
 ]
