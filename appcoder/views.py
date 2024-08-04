@@ -1,53 +1,37 @@
 from django.shortcuts import render
 from appcoder.models import Curso
-from appcoder.forms import CursoFormulario
-
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def inicio(request):
     return render(request, "appcoder/inicio.html")
 
-def cursos(request):
-    return render(request, "appcoder/cursos.html")
+class CursoListView(ListView):
+    model=Curso
+    context_object_name= "curso"
+    template_namee = "appcoder/curso_lista.html"
 
-    cursos= Curso.objects.all()
+class CursoDetailView(DetailView):
+    model=Curso
+    template_namee = "appcoder/curso_detalle.html"
 
-def estudiantes(request):
-    return render(request, "appcoder/estudiantes.html")
+class CursoCreateView(CreateView):
+    model= Curso
+    template_name= "appcoder/curso_crear.html"
+    success_url= reverse_lazy('ListaCursos')
+    fields=['nombre', 'camada']
 
-def profesores(request):
-    return render(request, "appcoder/profesores.html")
+class CursoUpdateViuew(UpdateView):
+    model= Curso
+    template_name="appcoder/curso_editar.html"
+    success_url=reverse_lazy('ListaCursos')
+    fields=['nombre', 'camada']
 
-def entregables(request):
-    return render(request, "appcoder/entregables.html")
-
-def cursoFormulario(request):
-
-    if request.method == 'POST':
-
-            curso =  Curso(request.post['curso'],(request.post['camada']))
-
-            curso.save()
-
-            return render(request, "appcoder/inicio.html")
-
-    return render(request, "appcoder/cursoFormulario.html")
-
-def form_con_api(request):
-
-      if request.method == "POST":
-
-            miFormulario = CursoFormulario(request.POST) # Aqui me llega la informacion del html
-            print(miFormulario)
-
-            if miFormulario.is_valid():
-                 informacion = miFormulario.cleaned_data
-                 curso = Curso(nombre=informacion["curso"], camada=informacion["camada"])
-                 curso.save()
-                 return render(request, "appcoder/inicio.html")
-      else:
-                 miFormulario = CursoFormulario()
-
-      return render(request, "appcoder/cursoFormulario.html", {"miFormulario": miFormulario})
-
+class CursoDeleteView(DeleteView):
+    model = Curso
+    template_name= "appcoder/curso_borrar.html"
+    success_url=reverse_lazy('ListaCursos')
 

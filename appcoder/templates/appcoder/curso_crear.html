@@ -1,0 +1,15 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static%}
+
+{% block contenidoQueCambia %}
+<h1>Crear Curso</h1>
+
+<form action=""method="POSTE">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type="submit" value="Crear">
+</form>
+{%endblock contenidoQueCambia%}
+
+

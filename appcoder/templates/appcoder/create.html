@@ -1,0 +1,13 @@
+{% extends 'appcoder/padre.html' %}
+
+{% load static%}
+
+{% block title %} Inicio {% endblock title%}
+
+{% block contenidoQueCambia %}
+    {% for curso in cursos   %}
+        <p>Nombre: {{curso.nombfe}}  | Camada: {{curso.camada}}</p>   
+    {% enfor %}  
+    
+   
+{% endblock %}
